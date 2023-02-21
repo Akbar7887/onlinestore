@@ -15,16 +15,13 @@ public class OrganizationResource {
 
     private final OrganizationService organizationService;
 
-
     @GetMapping("get")
-    private ResponseEntity<List<Organization>> getAll() {
-
+    private ResponseEntity<List<Object>> getAll() {
         return ResponseEntity.ok().body(organizationService.getAll());
     }
 
     @PostMapping("save")
-    private ResponseEntity<Organization> save(@RequestBody Organization organization) {
-
+    private ResponseEntity<Object> save(@RequestBody Organization organization) {
         return ResponseEntity.ok().body(organizationService.save(organization));
     }
 
