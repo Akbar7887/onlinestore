@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import uz.onlinestore.onlinestore.models.ACTIVE;
 
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class Product {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @NonNull
     private String name;
 
     @Column(columnDefinition = "TEXT")

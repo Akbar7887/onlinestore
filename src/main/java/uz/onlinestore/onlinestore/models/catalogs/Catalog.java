@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import uz.onlinestore.onlinestore.models.ACTIVE;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class Catalog {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @NonNull
     private String catalogname;
 
     private String imagepath;
@@ -30,12 +32,12 @@ public class Catalog {
     @Enumerated(value = EnumType.STRING)
     private ACTIVE active = ACTIVE.ACTIVE;
 
-    @OneToOne
-    private Catalog catalog;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Catalog> catalogs;
 
     @OneToMany(mappedBy = "catalog", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference
-    private List<Product> products = new ArrayList<Product>();
+    private List<Product> products = new ArrayList<>();
 
     public void addProduct(Product product){
         if(!this.products.contains(product)){
@@ -50,5 +52,15 @@ public class Catalog {
         }
     }
 
+    public void addCatalog(Catalog catalog){
+        if(!this.catalogs.contains(catalog)){
+            this.catalogs.add(catalog);
+        }
+    }
+    public void removeCatalog(Catalog catalog){
+        if(this.catalogs.contains(catalog)){
+            this.catalogs.remove(catalog);
+        }
+    }
 
 }
