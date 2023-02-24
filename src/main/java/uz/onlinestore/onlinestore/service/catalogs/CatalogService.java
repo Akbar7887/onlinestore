@@ -21,6 +21,10 @@ public class CatalogService {
         return catalogRepository.getAllActive(ACTIVE.ACTIVE);
     }
 
+    public List<Catalog> getAllActiveAllOfThem(){
+        return catalogRepository.getAllActiveAllOfThem(ACTIVE.ACTIVE);
+    }
+
     public Catalog save(Catalog catalog) {
         return catalogRepository.save(catalog);
     }

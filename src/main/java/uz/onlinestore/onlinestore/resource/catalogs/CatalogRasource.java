@@ -21,6 +21,11 @@ public class CatalogRasource {
         return catalogService.getAllActive();
     }
 
+    @GetMapping("getall")
+    private List<Catalog> getAllActiveAllOfThem() {
+        return catalogService.getAllActiveAllOfThem();
+    }
+
     @PostMapping("save")
     private Catalog save(@RequestBody Catalog catalog) {
         return catalogService.save(catalog);
