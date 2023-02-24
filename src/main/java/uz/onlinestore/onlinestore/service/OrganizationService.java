@@ -8,25 +8,25 @@ import uz.onlinestore.onlinestore.repository.OrganizationRepository;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
 @AllArgsConstructor
-public class OrganizationService implements Template{
+public class OrganizationService{
 
     private final OrganizationRepository organizationRepository;
 
-    @Override
-    public List<Object> getAll() {
-        return Collections.singletonList(organizationRepository.findAll());
+
+    public Optional<Organization> getFirst() {
+        List<Organization> list = organizationRepository.findAll();
+        return list.stream().findFirst();
     }
 
-    @Override
-    public Object save(Organization organization) {
+    public Organization save(Organization organization) {
         return organizationRepository.save(organization);
     }
 
-    @Override
     public void delete(Long id) {
         organizationRepository.deleteById(id);
     }

@@ -16,17 +16,18 @@ public class OrganizationResource {
     private final OrganizationService organizationService;
 
     @GetMapping("get")
-    private ResponseEntity<List<Object>> getAll() {
-        return ResponseEntity.ok().body(organizationService.getAll());
+    private Organization getAll() {
+        return organizationService.getFirst().get();
     }
 
     @PostMapping("save")
-    private ResponseEntity<Object> save(@RequestBody Organization organization) {
+    private ResponseEntity<Organization> save(@RequestBody Organization organization) {
         return ResponseEntity.ok().body(organizationService.save(organization));
     }
 
-    @DeleteMapping("delete")
-    private void delete(@RequestParam Long id) {
+    @DeleteMapping("delete/{id}")
+    private void delete(@PathVariable Long id) throws Exception {
+
         organizationService.delete(id);
     }
 }
