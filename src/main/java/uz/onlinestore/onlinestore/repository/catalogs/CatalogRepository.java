@@ -3,14 +3,16 @@ package uz.onlinestore.onlinestore.repository.catalogs;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 import uz.onlinestore.onlinestore.models.ACTIVE;
 import uz.onlinestore.onlinestore.models.catalogs.Catalog;
 
 import java.util.List;
 
+@Repository
 public interface CatalogRepository extends JpaRepository<Catalog, Long> {
 
-    @Query("select c from Catalog c where c.active = :active and c.parent.id is not null")
+    @Query("select c from Catalog c where c.active = :active and c.parent is null")
     List<Catalog> getAllActive(@Param("active") ACTIVE active);
 
     @Query("select c from Catalog c where c.active = :active")

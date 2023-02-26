@@ -23,8 +23,7 @@ public class Catalog implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-//    @EqualsAndHashCode.Include
+    @Column(name = "id")
     private Long id;
 
     @NonNull
@@ -42,36 +41,40 @@ public class Catalog implements Serializable {
     @JsonManagedReference
     private List<Catalog> catalogs;
 
-    @ManyToOne(targetEntity = Catalog.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "parent_id",
+            referencedColumnName = "id")
     @JsonBackReference
-//    @OnDelete(action = OnDeleteAction.CASCADE)
     private Catalog parent;
 
-    @OneToMany(mappedBy = "catalog", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "catalog",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
     private List<Product> products = new ArrayList<>();
 
-    public void addProduct(Product product){
-        if(!this.products.contains(product)){
+    public void addProduct(Product product) {
+        if (!this.products.contains(product)) {
             this.products.add(product);
             product.setCatalog(this);
         }
     }
-    public void removeProduct(Product product){
-        if(this.products.contains(product)){
+
+    public void removeProduct(Product product) {
+        if (this.products.contains(product)) {
             this.products.remove(product);
             product.setCatalog(null);
         }
     }
 
-    public void addCatalog(Catalog catalog){
-        if(!this.catalogs.contains(catalog)){
+    public void addCatalog(Catalog catalog) {
+        if (!this.catalogs.contains(catalog)) {
             this.catalogs.add(catalog);
             catalog.setParent(this);
         }
     }
-    public void removeCatalog(Catalog catalog){
-        if(this.catalogs.contains(catalog)){
+
+    public void removeCatalog(Catalog catalog) {
+        if (this.catalogs.contains(catalog)) {
             this.catalogs.remove(catalog);
             catalog.setParent(null);
         }
@@ -82,13 +85,15 @@ public class Catalog implements Serializable {
         return catalogs;
     }
 
-
-//    @JsonIgnore
     public Long getParentId() {
-        return parent.getId();
+        if (parent != null) {
+            return parent.getId();
+        } else {
+            return null;
+        }
     }
 
-    @JsonIgnore
+    //    @JsonIgnore
     public Catalog getParent() {
         return parent;
     }
