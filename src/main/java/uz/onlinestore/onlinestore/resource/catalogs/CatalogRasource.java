@@ -31,9 +31,9 @@ public class CatalogRasource {
         return catalogService.save(catalog);
     }
 
-    @PostMapping("savesub/{id}")
-    private Catalog savesub(@PathVariable Long id, @RequestBody Catalog catalog) {
-        return catalogService.saveSub(id, catalog);
+    @PostMapping("savesub")
+    private Catalog savesub(@RequestParam("id") String id, @RequestBody Catalog catalog) {
+        return catalogService.saveSub(Long.parseLong(id), catalog);
     }
 
     @DeleteMapping("delete/{id}")
