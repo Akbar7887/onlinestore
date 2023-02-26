@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface CatalogRepository extends JpaRepository<Catalog, Long> {
 
-    @Query("select c from Catalog c where c.active = :active and c.parent is null ")
+    @Query("select c from Catalog c where c.active = :active and c.parent.id is not null")
     List<Catalog> getAllActive(@Param("active") ACTIVE active);
 
     @Query("select c from Catalog c where c.active = :active")

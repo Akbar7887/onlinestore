@@ -1,12 +1,16 @@
 package uz.onlinestore.onlinestore.models.catalogs;
 
-import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import uz.onlinestore.onlinestore.models.ACTIVE;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,11 +19,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-//@JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
-//@JsonInclude(JsonInclude.Include.NON_NULL)
-//@JsonIgnoreProperties({"hibernate_lazy_initializer", "handler"})
-//@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Catalog {
+public class Catalog implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,9 +42,10 @@ public class Catalog {
     @JsonManagedReference
     private List<Catalog> catalogs;
 
-    @ManyToOne()
+    @ManyToOne(targetEntity = Catalog.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id", referencedColumnName = "id")
     @JsonBackReference
+//    @OnDelete(action = OnDeleteAction.CASCADE)
     private Catalog parent;
 
     @OneToMany(mappedBy = "catalog", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -79,5 +80,20 @@ public class Catalog {
     @JsonIgnore
     public List<Catalog> getCatalogs() {
         return catalogs;
+    }
+
+
+//    @JsonIgnore
+    public Long getParentId() {
+        return parent.getId();
+    }
+
+    @JsonIgnore
+    public Catalog getParent() {
+        return parent;
+    }
+
+    public void setParent(Catalog parent) {
+        this.parent = parent;
     }
 }

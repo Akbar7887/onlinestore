@@ -1,6 +1,7 @@
 package uz.onlinestore.onlinestore.service.catalogs;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import uz.onlinestore.onlinestore.models.ACTIVE;
@@ -14,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ProductService {
 
+    @Autowired
     final ProductRepository productRepository;
 
     public List<Product> getAllActive() {
