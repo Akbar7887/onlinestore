@@ -41,6 +41,16 @@ public class CatalogService {
         return null;
     }
 
+    public Catalog deleteActive(Long id){
+        Optional<Catalog> catalogOptional = catalogRepository.findById(id);
+        if(catalogOptional.isPresent()){
+            Catalog catalog = catalogOptional.get();
+            catalog.setActive(ACTIVE.NOACTIVE);
+            return catalogRepository.save(catalog);
+        }else {
+            return null;
+        }
+    }
     public void delete(Long id) {
         catalogRepository.deleteById(id);
     }

@@ -36,9 +36,13 @@ public class CatalogRasource {
         return catalogService.saveSub(Long.parseLong(id), catalog);
     }
 
+    @PutMapping("deleteactive")
+    private Catalog deleteActive(@RequestParam("id") String id){
+        return catalogService.deleteActive(Long.parseLong(id));
+    }
+
     @DeleteMapping("delete/{id}")
     private void delete(@PathVariable Long id) throws Exception {
-
         catalogService.delete(id);
     }
 
