@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import uz.onlinestore.onlinestore.models.catalogs.Characteristic;
 import uz.onlinestore.onlinestore.models.catalogs.Product;
+import uz.onlinestore.onlinestore.service.catalogs.CharacteristicService;
 import uz.onlinestore.onlinestore.service.catalogs.ProductService;
 
 import java.util.List;
@@ -17,6 +18,8 @@ public class ProductResource {
 
     @Autowired
     private final ProductService productService;
+    @Autowired
+    private final CharacteristicService characteristicService;
 
     @GetMapping("get")
     private List<Product> getAll() {
@@ -35,11 +38,11 @@ public class ProductResource {
 
     @PostMapping("addcharacter")
     private Product saveCharacter(@RequestParam("id") String id, @RequestBody  Characteristic characteristic){
-        return productService.saveCharacteristic(Long.parseLong(id), characteristic);
+        return characteristicService.saveCharacteristic(Long.parseLong(id), characteristic);
     }
 
     @PostMapping("removecharacter")
     private Product saveCharacter(@RequestParam("id") String id){
-        return productService.removeCharacteristic(Long.parseLong(id));
+        return characteristicService.removeCharacteristic(Long.parseLong(id));
     }
 }

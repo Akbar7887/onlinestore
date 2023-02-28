@@ -31,35 +31,7 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    // == == == Characteristic
-    public Product saveCharacteristic(Long id, Characteristic characteristic) {
 
-        Characteristic characteristic1 = characteristicRepository.save(characteristic);
-
-            Optional<Product> productOptional = productRepository.findById(id);
-            if (productOptional.isPresent()) {
-                Product product = productOptional.get();
-                product.addCharacteristic(characteristic1);
-                return productRepository.save(product);
-            } else {
-                return null;
-            }
-
-
-    }
-    public Product removeCharacteristic(Long id) {
-
-        Optional<Characteristic> characteristicOptional = characteristicRepository.findById(id);
-        if (characteristicOptional.isPresent()) {
-            Characteristic characteristic = characteristicOptional.get();
-            Product product = characteristic.getProduct();
-            product.removeCharacteristic(characteristic);
-            return productRepository.save(product);
-        } else {
-            return null;
-        }
-
-    }
 
 
 }

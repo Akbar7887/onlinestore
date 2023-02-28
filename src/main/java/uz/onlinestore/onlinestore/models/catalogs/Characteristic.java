@@ -36,16 +36,16 @@ public class Characteristic {
         this.product = product;
     }
 
-    public Long getId() {
-        return id;
-    }
-
     public Long getProductId() {
         if (this.product != null) {
             return this.product.getId();
         } else {
             return null;
         }
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public void setId(Long id) {
@@ -75,4 +75,6 @@ public class Characteristic {
     public void setProduct(Product product) {
         this.product = product;
     }
+
+
 }

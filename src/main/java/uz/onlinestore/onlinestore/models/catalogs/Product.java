@@ -3,16 +3,11 @@ package uz.onlinestore.onlinestore.models.catalogs;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import uz.onlinestore.onlinestore.models.ACTIVE;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "product")
@@ -47,9 +42,9 @@ public class Product {
 
     @OneToMany(mappedBy = "product",
             fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL)
+            cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    private Set<Characteristic> characteristicSet = new HashSet<>();
+    private List<Characteristic> characteristics = new ArrayList<>();
 
 
     public void addProductImage(ProductImage productImage){
@@ -68,7 +63,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(Long id, @NonNull String name, String description, String imagepath, ACTIVE active, Catalog catalog, List<ProductImage> productImages) {
+    public Product(Long id, @NonNull String name, String description, String imagepath, ACTIVE active, Catalog catalog, List<ProductImage> productImages, List<Characteristic> characteristics) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -76,18 +71,19 @@ public class Product {
         this.active = active;
         this.catalog = catalog;
         this.productImages = productImages;
+        this.characteristics = characteristics;
     }
 
     public void addCharacteristic(Characteristic characteristic) {
-        if (!this.characteristicSet.contains(characteristic)) {
-            this.characteristicSet.add(characteristic);
+        if (!this.characteristics.contains(characteristic)) {
+            this.characteristics.add(characteristic);
             characteristic.setProduct(this);
         }
     }
 
     public void removeCharacteristic(Characteristic characteristic) {
-        if (this.characteristicSet.contains(characteristic)) {
-            this.characteristicSet.remove(characteristic);
+        if (this.characteristics.contains(characteristic)) {
+            this.characteristics.remove(characteristic);
             characteristic.setProduct(null);
         }
     }
@@ -150,5 +146,13 @@ public class Product {
 
     public Long getCatalogId(){
         return this.catalog.getId();
+    }
+
+    public List<Characteristic> getCharacteristics() {
+        return characteristics;
+    }
+
+    public void setCharacteristics(List<Characteristic> characteristics) {
+        this.characteristics = characteristics;
     }
 }
