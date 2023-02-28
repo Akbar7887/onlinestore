@@ -4,14 +4,14 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import uz.onlinestore.onlinestore.models.ACTIVE;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "catalog")
@@ -48,6 +48,7 @@ public class Catalog implements Serializable {
             cascade = CascadeType.ALL)
     private List<Product> products = new ArrayList<>();
 
+
     public Catalog() {
     }
 
@@ -59,7 +60,10 @@ public class Catalog implements Serializable {
         this.catalogs = catalogs;
         this.parent = parent;
         this.products = products;
+
     }
+
+
 
     public void addProduct(Product product) {
         if (!this.products.contains(product)) {
@@ -89,18 +93,18 @@ public class Catalog implements Serializable {
         }
     }
 
-//    @JsonIgnore
+    //    @JsonIgnore
     public List<Catalog> getCatalogs() {
         List<Catalog> catalogslist = new ArrayList<>();
-        if(this.catalogs != null){
-            for (Catalog catalog : this.catalogs){
-                if (catalog.active == ACTIVE.ACTIVE){
+        if (this.catalogs != null) {
+            for (Catalog catalog : this.catalogs) {
+                if (catalog.active == ACTIVE.ACTIVE) {
                     catalogslist.add(catalog);
                 }
             }
         }
 
-        return  catalogslist;
+        return catalogslist;
     }
 
     public Long getParentId() {

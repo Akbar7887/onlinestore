@@ -4,6 +4,7 @@ package uz.onlinestore.onlinestore.resource.catalogs;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import uz.onlinestore.onlinestore.models.catalogs.Characteristic;
 import uz.onlinestore.onlinestore.models.catalogs.Product;
 import uz.onlinestore.onlinestore.service.catalogs.ProductService;
 
@@ -27,9 +28,18 @@ public class ProductResource {
 //        return productService.save(product);
 //    }
 
-    @DeleteMapping("delete/{id}")
-    private void delete(@PathVariable Long id) throws Exception {
+    @DeleteMapping("delete")
+    private void delete(@RequestParam("id") Long id) throws Exception {
         productService.delete(id);
     }
 
+    @PostMapping("addcharacter")
+    private Product saveCharacter(@RequestParam("id") String id, @RequestBody  Characteristic characteristic){
+        return productService.saveCharacteristic(Long.parseLong(id), characteristic);
+    }
+
+    @PostMapping("removecharacter")
+    private Product saveCharacter(@RequestParam("id") String id){
+        return productService.removeCharacteristic(Long.parseLong(id));
+    }
 }

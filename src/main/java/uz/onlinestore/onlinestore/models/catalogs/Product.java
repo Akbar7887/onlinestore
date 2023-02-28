@@ -10,7 +10,9 @@ import lombok.NonNull;
 import uz.onlinestore.onlinestore.models.ACTIVE;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "product")
@@ -43,6 +45,12 @@ public class Product {
     @JsonManagedReference
     private List<ProductImage> productImages = new ArrayList<ProductImage>();
 
+    @OneToMany(mappedBy = "product",
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private Set<Characteristic> characteristicSet = new HashSet<>();
+
 
     public void addProductImage(ProductImage productImage){
         if(!this.productImages.contains(productImage)){
@@ -68,6 +76,20 @@ public class Product {
         this.active = active;
         this.catalog = catalog;
         this.productImages = productImages;
+    }
+
+    public void addCharacteristic(Characteristic characteristic) {
+        if (!this.characteristicSet.contains(characteristic)) {
+            this.characteristicSet.add(characteristic);
+            characteristic.setProduct(this);
+        }
+    }
+
+    public void removeCharacteristic(Characteristic characteristic) {
+        if (this.characteristicSet.contains(characteristic)) {
+            this.characteristicSet.remove(characteristic);
+            characteristic.setProduct(null);
+        }
     }
 
     public Long getId() {
