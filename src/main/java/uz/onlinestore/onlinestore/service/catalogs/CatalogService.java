@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import uz.onlinestore.onlinestore.models.ACTIVE;
 import uz.onlinestore.onlinestore.models.catalogs.Catalog;
+import uz.onlinestore.onlinestore.models.catalogs.Product;
 import uz.onlinestore.onlinestore.repository.catalogs.CatalogRepository;
 
 import java.util.List;
@@ -53,5 +54,18 @@ public class CatalogService {
     }
     public void delete(Long id) {
         catalogRepository.deleteById(id);
+    }
+
+    public Catalog saveProduct(Long id, Product product) {
+        Optional<Catalog> catalogOptional = catalogRepository.findById(id);
+        if (catalogOptional.isPresent()) {
+            Catalog catalog = catalogOptional.get();
+            catalog.addProduct(product);
+            return catalogRepository.save(catalog);
+        }else {
+            return null;
+        }
+
+
     }
 }

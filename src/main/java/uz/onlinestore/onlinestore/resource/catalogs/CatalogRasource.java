@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import uz.onlinestore.onlinestore.models.catalogs.Catalog;
+import uz.onlinestore.onlinestore.models.catalogs.Product;
 import uz.onlinestore.onlinestore.service.catalogs.CatalogService;
 
 import java.util.List;
@@ -45,5 +46,11 @@ public class CatalogRasource {
     private void delete(@PathVariable Long id) throws Exception {
         catalogService.delete(id);
     }
+    // =======
+    @PostMapping("saveproduct")
+    private Catalog saveProduct(@RequestParam("id") String id, @RequestBody Product product){
+        return catalogService.saveProduct(Long.parseLong(id), product);
+    }
+
 
 }

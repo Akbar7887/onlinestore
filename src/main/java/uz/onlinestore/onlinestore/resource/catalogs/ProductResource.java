@@ -22,10 +22,10 @@ public class ProductResource {
         return productService.getAllActive();
     }
 
-    @PostMapping("save")
-    private Product save(@RequestBody Product product) {
-        return productService.save(product);
-    }
+//    @PostMapping("save")
+//    private Product save(@RequestBody Product product) {
+//        return productService.save(product);
+//    }
 
     @DeleteMapping("delete/{id}")
     private void delete(@PathVariable Long id) throws Exception {

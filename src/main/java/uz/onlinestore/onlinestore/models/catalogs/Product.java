@@ -14,9 +14,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "product")
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Product {
 
     @Id
@@ -60,5 +57,76 @@ public class Product {
         }
     }
 
+    public Product() {
+    }
 
+    public Product(Long id, @NonNull String name, String description, String imagepath, ACTIVE active, Catalog catalog, List<ProductImage> productImages) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.imagepath = imagepath;
+        this.active = active;
+        this.catalog = catalog;
+        this.productImages = productImages;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImagepath() {
+        return imagepath;
+    }
+
+    public void setImagepath(String imagepath) {
+        this.imagepath = imagepath;
+    }
+
+    public ACTIVE getActive() {
+        return active;
+    }
+
+    public void setActive(ACTIVE active) {
+        this.active = active;
+    }
+
+    public Catalog getCatalog() {
+        return catalog;
+    }
+
+    public void setCatalog(Catalog catalog) {
+        this.catalog = catalog;
+    }
+
+    public List<ProductImage> getProductImages() {
+        return productImages;
+    }
+
+    public void setProductImages(List<ProductImage> productImages) {
+        this.productImages = productImages;
+    }
+
+    public Long getCatalogId(){
+        return this.catalog.getId();
+    }
 }

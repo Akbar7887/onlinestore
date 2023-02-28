@@ -5,10 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import uz.onlinestore.onlinestore.models.ACTIVE;
+import uz.onlinestore.onlinestore.models.catalogs.Catalog;
 import uz.onlinestore.onlinestore.models.catalogs.Product;
+import uz.onlinestore.onlinestore.repository.catalogs.CatalogRepository;
 import uz.onlinestore.onlinestore.repository.catalogs.ProductRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -22,9 +25,7 @@ public class ProductService {
         return productRepository.getAllActive(ACTIVE.ACTIVE);
     }
 
-    public Product save(Product product) {
-        return productRepository.save(product);
-    }
+
 
     public void delete(Long id) {
         productRepository.deleteById(id);
