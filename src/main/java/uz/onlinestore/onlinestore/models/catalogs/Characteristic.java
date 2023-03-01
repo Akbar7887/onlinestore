@@ -19,7 +19,7 @@ public class Characteristic {
 
     private String valuename;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(optional = true)
     @JoinColumn(name = "product_id",
             referencedColumnName = "id")
     @JsonBackReference

@@ -3,6 +3,7 @@ package uz.onlinestore.onlinestore.resource.catalogs;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import uz.onlinestore.onlinestore.dto.CatalogDto;
 import uz.onlinestore.onlinestore.models.catalogs.Catalog;
 import uz.onlinestore.onlinestore.models.catalogs.Product;
 import uz.onlinestore.onlinestore.service.catalogs.CatalogService;
@@ -18,8 +19,8 @@ public class CatalogRasource {
     private final CatalogService catalogService;
 
     @GetMapping("get")
-    private List<Catalog> getAll() {
-        return catalogService.getAllActive();
+    private List<CatalogDto> getAll() {
+        return catalogService.getAllCatalogDto();
     }
 
     @GetMapping("getall")

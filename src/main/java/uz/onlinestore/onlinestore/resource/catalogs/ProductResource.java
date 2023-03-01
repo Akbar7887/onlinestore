@@ -4,6 +4,7 @@ package uz.onlinestore.onlinestore.resource.catalogs;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import uz.onlinestore.onlinestore.dto.ProductDto;
 import uz.onlinestore.onlinestore.models.catalogs.Characteristic;
 import uz.onlinestore.onlinestore.models.catalogs.Product;
 import uz.onlinestore.onlinestore.service.catalogs.CharacteristicService;
@@ -22,14 +23,15 @@ public class ProductResource {
     private final CharacteristicService characteristicService;
 
     @GetMapping("get")
-    private List<Product> getAll() {
-        return productService.getAllActive();
+    private List<ProductDto> getAll() {
+        return productService.getAllProductDto();
     }
 
-//    @PostMapping("save")
-//    private Product save(@RequestBody Product product) {
-//        return productService.save(product);
-//    }
+    @GetMapping("getbyid")
+    private Product getById(@RequestParam("id") String id) {
+        return productService.getById(Long.parseLong(id));
+    }
+
 
     @DeleteMapping("delete")
     private void delete(@RequestParam("id") Long id) throws Exception {
@@ -37,12 +39,12 @@ public class ProductResource {
     }
 
     @PostMapping("addcharacter")
-    private Product saveCharacter(@RequestParam("id") String id, @RequestBody  Characteristic characteristic){
+    private Product saveCharacter(@RequestParam("id") String id, @RequestBody Characteristic characteristic) {
         return characteristicService.saveCharacteristic(Long.parseLong(id), characteristic);
     }
 
     @PostMapping("removecharacter")
-    private Product saveCharacter(@RequestParam("id") String id){
+    private Product saveCharacter(@RequestParam("id") String id) {
         return characteristicService.removeCharacteristic(Long.parseLong(id));
     }
 }

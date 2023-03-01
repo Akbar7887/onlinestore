@@ -7,15 +7,12 @@ import jakarta.persistence.*;
 import lombok.NonNull;
 import uz.onlinestore.onlinestore.models.ACTIVE;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "catalog")
-public class Catalog implements Serializable {
+public class Catalog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,14 +34,14 @@ public class Catalog implements Serializable {
     @JsonManagedReference
     private List<Catalog> catalogs;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     @JoinColumn(name = "parent_id",
             referencedColumnName = "id")
     @JsonBackReference
     private Catalog parent;
 
     @OneToMany(mappedBy = "catalog",
-            fetch = FetchType.LAZY,
+            fetch = FetchType.EAGER,
             cascade = CascadeType.ALL)
     private List<Product> products = new ArrayList<>();
 
@@ -62,7 +59,6 @@ public class Catalog implements Serializable {
         this.products = products;
 
     }
-
 
 
     public void addProduct(Product product) {
@@ -93,7 +89,6 @@ public class Catalog implements Serializable {
         }
     }
 
-    //    @JsonIgnore
     public List<Catalog> getCatalogs() {
         List<Catalog> catalogslist = new ArrayList<>();
         if (this.catalogs != null) {
@@ -115,7 +110,6 @@ public class Catalog implements Serializable {
         }
     }
 
-    @JsonIgnore
     public Catalog getParent() {
         return parent;
     }
@@ -144,7 +138,7 @@ public class Catalog implements Serializable {
         return imagepath;
     }
 
-    public void setImagepath(String imagepath) {
+    public void setImagepath() {
         this.imagepath = imagepath;
     }
 

@@ -1,13 +1,21 @@
 package uz.onlinestore.onlinestore.models.catalogs;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.NonNull;
+import org.hibernate.annotations.*;
 import uz.onlinestore.onlinestore.models.ACTIVE;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "product")
@@ -36,13 +44,15 @@ public class Product {
     @JsonBackReference
     private Catalog catalog;
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product",
+           fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<ProductImage> productImages = new ArrayList<ProductImage>();
 
     @OneToMany(mappedBy = "product",
             fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL, orphanRemoval = true)
+            cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Characteristic> characteristics = new ArrayList<>();
 
@@ -154,5 +164,20 @@ public class Product {
 
     public void setCharacteristics(List<Characteristic> characteristics) {
         this.characteristics = characteristics;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", imagepath='" + imagepath + '\'' +
+                ", active=" + active +
+                ", catalog=" + catalog +
+                ", productImages=" + productImages +
+                ", characteristics=" + characteristics +
+                '}';
     }
 }
