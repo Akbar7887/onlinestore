@@ -9,6 +9,7 @@ import uz.onlinestore.onlinestore.models.ACTIVE;
 import uz.onlinestore.onlinestore.models.catalogs.Catalog;
 import uz.onlinestore.onlinestore.models.catalogs.Product;
 import uz.onlinestore.onlinestore.repository.catalogs.CatalogRepository;
+import uz.onlinestore.onlinestore.repository.catalogs.ProductRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,11 +17,13 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-@Transactional(readOnly = true)
+@Transactional
 public class CatalogService {
 
     @Autowired
     final CatalogRepository catalogRepository;
+    @Autowired
+    final ProductRepository productRepository;
 
     private CatalogDto convertToCatalogDto(Catalog catalog) {
 
@@ -86,8 +89,14 @@ public class CatalogService {
         Optional<Catalog> catalogOptional = catalogRepository.findById(id);
         if (catalogOptional.isPresent()) {
             Catalog catalog = catalogOptional.get();
-            catalog.addProduct(product);
-            return catalogRepository.save(catalog);
+            if(product.getId() == null){
+                catalog.addProduct(product);
+               catalog = catalogRepository.save(catalog);
+            }else {
+                product.setCatalog(catalog);
+                productRepository.save(product);
+            }
+            return catalog;
         } else {
             return null;
         }

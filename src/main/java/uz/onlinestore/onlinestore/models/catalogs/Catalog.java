@@ -29,7 +29,7 @@ public class Catalog {
     private ACTIVE active = ACTIVE.ACTIVE;
 
     @OneToMany(mappedBy = "parent",
-            fetch = FetchType.EAGER,
+            fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Catalog> catalogs;
@@ -41,7 +41,7 @@ public class Catalog {
     private Catalog parent;
 
     @OneToMany(mappedBy = "catalog",
-            fetch = FetchType.EAGER,
+            fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private List<Product> products = new ArrayList<>();
 
