@@ -45,6 +45,7 @@ public class ProductService {
         productDto.setImagepath(product.getImagepath());
 //        productDto.setCatalog(product.getCatalog());
         productDto.setProductImages(product.getProductImages());
+        productDto.setCharacteristics(product.getCharacteristics());
         return  productDto;
     }
     public List<Product> getAllActive() {

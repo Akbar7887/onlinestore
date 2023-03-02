@@ -44,8 +44,9 @@ public class Product {
     private List<ProductImage> productImages = new ArrayList<ProductImage>();
 
     @OneToMany(mappedBy = "product",
-            fetch = FetchType.EAGER,
+            fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Characteristic> characteristics = new ArrayList<>();
 
 

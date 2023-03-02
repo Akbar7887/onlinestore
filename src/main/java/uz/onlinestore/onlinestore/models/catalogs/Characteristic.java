@@ -19,10 +19,10 @@ public class Characteristic {
 
     private String valuename;
 
-    @ManyToOne(optional = true)
+    @ManyToOne()
     @JoinColumn(name = "product_id",
             referencedColumnName = "id")
-//    @JsonBackReference
+    @JsonBackReference
     private Product product;
 
 

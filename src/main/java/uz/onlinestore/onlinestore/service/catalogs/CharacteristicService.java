@@ -46,22 +46,44 @@ public class CharacteristicService {
 
 
     public Product saveCharacteristic(Long id, Characteristic characteristic) {
-
-
         Optional<Product> productOptional = productRepository.findById(id);
         if (productOptional.isPresent()) {
             Product product = productOptional.get();
-            product.addCharacteristic(characteristic);
-            return productRepository.save(product);
+            if (characteristic.getId() == null) {
+                product.addCharacteristic(characteristic);
+                return productRepository.save(product);
+            } else {
+                characteristic.setProduct(product);
+                characteristicRepository.save(characteristic);
+                return product;
+            }
         } else {
             return null;
         }
 
+    }
 
+    public Product saveCharacteristicList(Long id, List<Characteristic> characteristics) {
+        Optional<Product> productOptional = productRepository.findById(id);
+        if (productOptional.isPresent()) {
+            Product product = productOptional.get();
+            for (Characteristic characteristic : characteristics) {
+                if (characteristic.getId() == null) {
+                    product.addCharacteristic(characteristic);
+                    product =  productRepository.save(product);
+                } else {
+                    characteristic.setProduct(product);
+                    characteristicRepository.save(characteristic);
+                }
+            }
+            return product;
+
+        } else {
+            return null;
+        }
     }
 
     public Product removeCharacteristic(Long id) {
-
         Optional<Characteristic> characteristicOptional = characteristicRepository.findById(id);
         if (characteristicOptional.isPresent()) {
             Characteristic characteristic = characteristicOptional.get();

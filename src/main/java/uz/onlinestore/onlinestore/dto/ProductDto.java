@@ -29,6 +29,6 @@ public class ProductDto {
     private ACTIVE active = ACTIVE.ACTIVE;
 //    private Catalog catalog;
     private List<ProductImage> productImages ;
-  //  private List<Characteristic> characteristics ;
+    private List<Characteristic> characteristics ;
 
 }
