@@ -44,9 +44,9 @@ public class CatalogService {
                 collect(Collectors.toList());
     }
 
-    public List<Catalog> getAllActive() {
-        return catalogRepository.getAllActive(ACTIVE.ACTIVE);
-    }
+//    public List<Catalog> getAllActive() {
+//        return catalogRepository.getAllActive(ACTIVE.ACTIVE);
+//    }
 
     public List<Catalog> getAllActiveAllOfThem() {
         return catalogRepository.getAllActiveAllOfThem(ACTIVE.ACTIVE);

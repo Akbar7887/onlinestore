@@ -19,8 +19,6 @@ public class ProductResource {
 
     @Autowired
     private final ProductService productService;
-    @Autowired
-    private final CharacteristicService characteristicService;
 
     @GetMapping("get")
     private List<ProductDto> getAll() {
@@ -38,13 +36,5 @@ public class ProductResource {
         productService.delete(id);
     }
 
-    @PostMapping("addcharacter")
-    private Product saveCharacter(@RequestParam("id") String id, @RequestBody Characteristic characteristic) {
-        return characteristicService.saveCharacteristic(Long.parseLong(id), characteristic);
-    }
 
-    @PostMapping("removecharacter")
-    private Product saveCharacter(@RequestParam("id") String id) {
-        return characteristicService.removeCharacteristic(Long.parseLong(id));
-    }
 }
