@@ -2,20 +2,13 @@ package uz.onlinestore.onlinestore.models.catalogs;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 import lombok.NonNull;
-import org.hibernate.annotations.*;
 import uz.onlinestore.onlinestore.models.ACTIVE;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Table(name = "product")
@@ -45,7 +38,7 @@ public class Product {
     private Catalog catalog;
 
     @OneToMany(mappedBy = "product",
-           fetch = FetchType.EAGER,
+            fetch = FetchType.EAGER,
             cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<ProductImage> productImages = new ArrayList<ProductImage>();
@@ -53,18 +46,18 @@ public class Product {
     @OneToMany(mappedBy = "product",
             fetch = FetchType.EAGER,
             cascade = CascadeType.ALL)
-    @JsonManagedReference
     private List<Characteristic> characteristics = new ArrayList<>();
 
 
-    public void addProductImage(ProductImage productImage){
-        if(!this.productImages.contains(productImage)){
+    public void addProductImage(ProductImage productImage) {
+        if (!this.productImages.contains(productImage)) {
             this.productImages.add(productImage);
             productImage.setProduct(this);
         }
     }
-    public void removeProductImage(ProductImage productImage){
-        if(this.productImages.contains(productImage)){
+
+    public void removeProductImage(ProductImage productImage) {
+        if (this.productImages.contains(productImage)) {
             this.productImages.remove(productImage);
             productImage.setProduct(null);
         }
@@ -154,11 +147,13 @@ public class Product {
         this.productImages = productImages;
     }
 
-    public Long getCatalogId(){
+    public Long getCatalogId() {
         return this.catalog.getId();
     }
 
+    @JsonIgnore
     public List<Characteristic> getCharacteristics() {
+
         return characteristics;
     }
 
