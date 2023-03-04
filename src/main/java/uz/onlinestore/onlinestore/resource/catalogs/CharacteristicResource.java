@@ -32,13 +32,14 @@ public class CharacteristicResource {
     private Product saveCharacter(@RequestParam("id") String id, @RequestBody Characteristic characteristic) {
         return characteristicService.saveCharacteristic(Long.parseLong(id), characteristic);
     }
+
     @PostMapping("addcharacterlist")
-    private Product saveCharacter(@RequestParam("id") String id, @RequestBody List<Characteristic> characteristics) {
+    private List<CharacteristicDto> saveCharacter(@RequestParam("id") String id, @RequestBody List<Characteristic> characteristics) {
         return characteristicService.saveCharacteristicList(Long.parseLong(id), characteristics);
     }
 
-    @PostMapping("removecharacter")
-    private Product saveCharacter(@RequestParam("id") String id) {
-        return characteristicService.removeCharacteristic(Long.parseLong(id));
+    @DeleteMapping("removecharacter")
+    private void saveCharacter(@RequestParam("id") String id) {
+        characteristicService.removeCharacteristic(Long.parseLong(id));
     }
 }

@@ -46,7 +46,7 @@ public class Product {
     @OneToMany(mappedBy = "product",
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
-    @JsonManagedReference
+//    @JsonManagedReference
     private List<Characteristic> characteristics = new ArrayList<>();
 
 
