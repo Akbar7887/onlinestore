@@ -26,13 +26,15 @@ public class CatalogService {
 
     private CatalogDto convertToCatalogDto(Catalog catalog) {
 
-        CatalogDto catalogDto = new CatalogDto();
-        catalogDto.setId(catalog.getId());
-        catalogDto.setCatalogname(catalog.getCatalogname());
+            CatalogDto catalogDto = new CatalogDto();
+            catalogDto.setId(catalog.getId());
+            catalogDto.setCatalogname(catalog.getCatalogname());
 //        catalogDto.setImagepath(catalog.getImagepath());
-        catalogDto.setActive(catalog.getActive());
-        catalogDto.setCatalogs(catalog.getCatalogs());
-        catalogDto.setParent(catalog.getParent());
+            catalogDto.setActive(catalog.getActive());
+            catalogDto.setCatalogs(catalog.getCatalogs());
+            catalogDto.setParent(catalog.getParent());
+
+
 
         return catalogDto;
     }

@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import uz.onlinestore.onlinestore.models.ACTIVE;
 import uz.onlinestore.onlinestore.models.catalogs.Catalog;
-import uz.onlinestore.onlinestore.models.catalogs.Product;
 
 import java.util.List;
 

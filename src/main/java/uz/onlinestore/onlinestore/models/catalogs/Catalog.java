@@ -52,6 +52,7 @@ public class Catalog {
         this.catalogname = catalogname;
         this.imagepath = imagepath;
         this.active = active;
+        this.catalogs = catalogs;
         this.parent = parent;
     }
 
