@@ -31,32 +31,6 @@ public class Product {
 //    @JsonBackReference
     private Catalog catalog;
 
-//    @OneToMany(mappedBy = "product",
-//            fetch = FetchType.EAGER,
-//            cascade = CascadeType.ALL)
-//    @JsonManagedReference
-//    private List<ProductImage> productImages = new ArrayList<ProductImage>();
-
-//    @OneToMany(mappedBy = "product",
-//            fetch = FetchType.LAZY,
-//            cascade = CascadeType.ALL)
-////    @JsonManagedReference
-//    private List<Characteristic> characteristics = new ArrayList<>();
-
-
-//    public void addProductImage(ProductImage productImage) {
-//        if (!this.productImages.contains(productImage)) {
-//            this.productImages.add(productImage);
-//            productImage.setProduct(this);
-//        }
-//    }
-//
-//    public void removeProductImage(ProductImage productImage) {
-//        if (this.productImages.contains(productImage)) {
-//            this.productImages.remove(productImage);
-//            productImage.setProduct(null);
-//        }
-//    }
 
     public Product() {
     }
@@ -69,21 +43,6 @@ public class Product {
         this.active = active;
         this.catalog = catalog;
     }
-
-    //    public void addCharacteristic(Characteristic characteristic) {
-//        if (!this.characteristics.contains(characteristic)) {
-//            this.characteristics.add(characteristic);
-//            characteristic.setProduct(this);
-//        }
-//    }
-//
-//    public void removeCharacteristic(Characteristic characteristic) {
-//        if (this.characteristics.contains(characteristic)) {
-//            this.characteristics.remove(characteristic);
-//            characteristic.setProduct(null);
-//        }
-//    }
-
 
     public Long getId() {
         return id;

@@ -33,7 +33,7 @@ public class CharacteristicResource {
 //    }
 
     @PostMapping("save")
-    private List<Characteristic> saveCharacter(@RequestParam("id") String id, @RequestBody List<Characteristic> characteristics) {
+    private List<Characteristic> saveCharacter(@RequestBody List<Characteristic> characteristics) {
         return characteristicService.saveCharacteristicList(characteristics);
     }
 

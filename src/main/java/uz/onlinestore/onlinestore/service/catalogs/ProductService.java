@@ -52,8 +52,10 @@ public class ProductService {
         return productRepository.getAllActive(ACTIVE.ACTIVE, catalog_id);
     }
 
-    public void delete(Long id) {
-        productRepository.deleteById(id);
+    public Product delete(Long id) {
+        Product product = productRepository.findById(id).orElse(null);
+        product.setActive(ACTIVE.NOACTIVE);
+        return  productRepository.save(product);
     }
 
     public Product getById(Long id) {

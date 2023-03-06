@@ -32,9 +32,9 @@ public class ProductResource {
     }
 
 
-    @DeleteMapping("delete")
-    private void delete(@RequestParam("id") Long id) throws Exception {
-        productService.delete(id);
+    @PutMapping("delete")
+    private Product delete(@RequestParam("id") Long id) throws Exception {
+       return  productService.delete(id);
     }
 
     @PostMapping("save")
