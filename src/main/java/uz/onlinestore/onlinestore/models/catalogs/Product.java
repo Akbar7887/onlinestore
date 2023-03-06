@@ -1,14 +1,8 @@
 package uz.onlinestore.onlinestore.models.catalogs;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.NonNull;
 import uz.onlinestore.onlinestore.models.ACTIVE;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "product")
@@ -74,11 +68,9 @@ public class Product {
         this.imagepath = imagepath;
         this.active = active;
         this.catalog = catalog;
-//        this.productImages = productImages;
-//        this.characteristics = characteristics;
     }
 
-//    public void addCharacteristic(Characteristic characteristic) {
+    //    public void addCharacteristic(Characteristic characteristic) {
 //        if (!this.characteristics.contains(characteristic)) {
 //            this.characteristics.add(characteristic);
 //            characteristic.setProduct(this);
@@ -152,6 +144,7 @@ public class Product {
     public Long getCatalogId() {
         return this.catalog.getId();
     }
+
 
 //    @JsonIgnore
 //    public List<Characteristic> getCharacteristics() {

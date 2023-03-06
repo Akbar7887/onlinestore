@@ -22,7 +22,7 @@ public class ProductResource {
     private final ProductService productService;
 
     @GetMapping("get")
-    private List<ProductDto> getAll(String catalog_id) {
+    private List<ProductDto> getAll(@RequestParam("id") String catalog_id) {
         return productService.getAllProductDto(Long.parseLong(catalog_id));
     }
 
@@ -38,7 +38,7 @@ public class ProductResource {
     }
 
     @PostMapping("save")
-    private Product saveProduct(@RequestBody Product product){
+    private ProductDto saveProduct(@RequestBody Product product){
         return productService.save(product);
     }
 

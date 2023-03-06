@@ -3,14 +3,10 @@ package uz.onlinestore.onlinestore.service.catalogs;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import uz.onlinestore.onlinestore.dto.ProductDto;
 import uz.onlinestore.onlinestore.models.ACTIVE;
-import uz.onlinestore.onlinestore.models.catalogs.Catalog;
-import uz.onlinestore.onlinestore.models.catalogs.Characteristic;
 import uz.onlinestore.onlinestore.models.catalogs.Product;
-import uz.onlinestore.onlinestore.models.catalogs.ProductImage;
 import uz.onlinestore.onlinestore.repository.catalogs.CatalogRepository;
 import uz.onlinestore.onlinestore.repository.catalogs.CharacteristicRepository;
 import uz.onlinestore.onlinestore.repository.catalogs.ProductRepository;
@@ -31,26 +27,27 @@ public class ProductService {
     @Autowired
     final CatalogRepository catalogRepository;
 
-    public  List<ProductDto> getAllProductDto(Long catalog_id){
-       return productRepository
+    public List<ProductDto> getAllProductDto(Long catalog_id) {
+        return productRepository
                 .getAllActive(ACTIVE.ACTIVE, catalog_id)
                 .stream()
                 .map(this::convertToProductDto)
                 .collect(Collectors.toList());
     }
 
-    private  ProductDto convertToProductDto(Product product){
+    private ProductDto convertToProductDto(Product product) {
         ProductDto productDto = new ProductDto();
 
         productDto.setId(product.getId());
         productDto.setName(product.getName());
         productDto.setDescription(product.getDescription());
         productDto.setImagepath(product.getImagepath());
-//        productDto.setCatalog(product.getCatalog());
+        productDto.setCatalog(product.getCatalog());
 //        productDto.setProductImages(product.getProductImages());
 //        productDto.setCharacteristics(product.getCharacteristics());
-        return  productDto;
+        return productDto;
     }
+
     public List<Product> getAllActive(Long catalog_id) {
         return productRepository.getAllActive(ACTIVE.ACTIVE, catalog_id);
     }
@@ -64,12 +61,10 @@ public class ProductService {
         return productOptional.orElse(null);
     }
 
-    public Product save(Product product){
+    public ProductDto save(Product product) {
 
-        return  productRepository.save(product);
+        return convertToProductDto(productRepository.save(product));
     }
-
-
 
 
 }

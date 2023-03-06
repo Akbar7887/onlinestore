@@ -7,6 +7,7 @@ import lombok.NonNull;
 import uz.onlinestore.onlinestore.models.ACTIVE;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "catalog")
@@ -103,10 +104,14 @@ public class Catalog {
     }
 
     public List<Catalog> getCatalogs() {
-        return catalogs;
+        if(catalogs != null){
+            return catalogs.stream().filter(catalog -> catalog.getActive() == ACTIVE.ACTIVE).collect(Collectors.toList());
+        }
+        return  catalogs;
     }
 
     public void setCatalogs(List<Catalog> catalogs) {
+
         this.catalogs = catalogs;
     }
 

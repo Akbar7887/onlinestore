@@ -34,8 +34,6 @@ public class CatalogService {
             catalogDto.setCatalogs(catalog.getCatalogs());
             catalogDto.setParent(catalog.getParent());
 
-
-
         return catalogDto;
     }
 

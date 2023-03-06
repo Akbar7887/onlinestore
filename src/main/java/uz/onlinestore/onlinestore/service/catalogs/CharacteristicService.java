@@ -63,25 +63,9 @@ public class CharacteristicService {
 //
 //    }
 
-//    public List<CharacteristicDto> saveCharacteristicList(Long id, List<Characteristic> characteristics) {
-//        Optional<Product> productOptional = productRepository.findById(id);
-//        if (productOptional.isPresent()) {
-//            Product product = productOptional.get();
-//            for (Characteristic characteristic : characteristics) {
-//                if (characteristic.getId() == null) {
-//                    product.addCharacteristic(characteristic);
-//                    product = productRepository.save(product);
-//                } else {
-//                    characteristic.setProduct(product);
-//                    characteristicRepository.save(characteristic);
-//                }
-//            }
-//            return getAllDto(product.getId());
-//
-//        } else {
-//            return null;
-//        }
-//    }
+    public List<Characteristic> saveCharacteristicList(List<Characteristic> characteristics) {
+                  return characteristicRepository.saveAll(characteristics);
+    }
 
     public void removeCharacteristic(Long id) {
         Optional<Characteristic> characteristicOptional = characteristicRepository.findById(id);
