@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import uz.onlinestore.onlinestore.dto.ProductDto;
+import uz.onlinestore.onlinestore.models.catalogs.Catalog;
 import uz.onlinestore.onlinestore.models.catalogs.Characteristic;
 import uz.onlinestore.onlinestore.models.catalogs.Product;
 import uz.onlinestore.onlinestore.service.catalogs.CharacteristicService;
@@ -21,8 +22,8 @@ public class ProductResource {
     private final ProductService productService;
 
     @GetMapping("get")
-    private List<ProductDto> getAll() {
-        return productService.getAllProductDto();
+    private List<ProductDto> getAll(String catalog_id) {
+        return productService.getAllProductDto(Long.parseLong(catalog_id));
     }
 
     @GetMapping("getbyid")
@@ -34,6 +35,11 @@ public class ProductResource {
     @DeleteMapping("delete")
     private void delete(@RequestParam("id") Long id) throws Exception {
         productService.delete(id);
+    }
+
+    @PostMapping("save")
+    private Product saveProduct(@RequestBody Product product){
+        return productService.save(product);
     }
 
 

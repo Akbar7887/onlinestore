@@ -17,8 +17,9 @@ public class CatalogDto {
     private Long id;
     private String catalogname;
     private String imagepath;
-    private ACTIVE active;
+    private ACTIVE active = ACTIVE.ACTIVE;
     private List<Catalog> catalogs;
     private Catalog parent;
-    private List<Product> products;
+
+
 }

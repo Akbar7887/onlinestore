@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import uz.onlinestore.onlinestore.dto.CatalogDto;
 import uz.onlinestore.onlinestore.models.catalogs.Catalog;
-import uz.onlinestore.onlinestore.models.catalogs.Product;
 import uz.onlinestore.onlinestore.service.catalogs.CatalogService;
 
 import java.util.List;
@@ -28,6 +27,11 @@ public class CatalogRasource {
         return catalogService.getAllActiveAllOfThem();
     }
 
+//    @GetMapping("getbyparentid")
+//    private List<CatalogDto> getByParentId(@RequestParam("parent_id") String parent_id) {
+//        return catalogService.getByParentId(Long.parseLong(parent_id));
+//    }
+
     @PostMapping("save")
     private Catalog save(@RequestBody Catalog catalog) {
         return catalogService.save(catalog);
@@ -39,7 +43,7 @@ public class CatalogRasource {
     }
 
     @PutMapping("deleteactive")
-    private Catalog deleteActive(@RequestParam("id") String id){
+    private Catalog deleteActive(@RequestParam("id") String id) {
         return catalogService.deleteActive(Long.parseLong(id));
     }
 
@@ -48,12 +52,6 @@ public class CatalogRasource {
         catalogService.delete(id);
     }
     // =======
-    @PostMapping("saveproduct")
-    private Catalog saveProduct(@RequestParam("id") String id, @RequestBody Product product){
-        return catalogService.saveProduct(Long.parseLong(id), product);
-    }
-
-
 
 
 }

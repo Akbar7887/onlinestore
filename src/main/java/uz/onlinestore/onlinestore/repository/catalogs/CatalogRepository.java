@@ -18,4 +18,8 @@ public interface CatalogRepository extends JpaRepository<Catalog, Long> {
 
     @Query("select c from Catalog c where c.active = :active")
     List<Catalog> getAllActiveAllOfThem(@Param("active") ACTIVE active);
+
+//    @Query("select c from Catalog c where c.active = :active and c.parent.id =:parent_id")
+//    List<Catalog> getByParent(@Param("active") ACTIVE active, @Param("parent_id") Long parent_id);
+
 }

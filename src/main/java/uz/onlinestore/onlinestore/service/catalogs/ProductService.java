@@ -11,6 +11,7 @@ import uz.onlinestore.onlinestore.models.catalogs.Catalog;
 import uz.onlinestore.onlinestore.models.catalogs.Characteristic;
 import uz.onlinestore.onlinestore.models.catalogs.Product;
 import uz.onlinestore.onlinestore.models.catalogs.ProductImage;
+import uz.onlinestore.onlinestore.repository.catalogs.CatalogRepository;
 import uz.onlinestore.onlinestore.repository.catalogs.CharacteristicRepository;
 import uz.onlinestore.onlinestore.repository.catalogs.ProductRepository;
 
@@ -27,10 +28,12 @@ public class ProductService {
     final ProductRepository productRepository;
     @Autowired
     final CharacteristicRepository characteristicRepository;
+    @Autowired
+    final CatalogRepository catalogRepository;
 
-    public  List<ProductDto> getAllProductDto(){
+    public  List<ProductDto> getAllProductDto(Long catalog_id){
        return productRepository
-                .getAllActive(ACTIVE.ACTIVE)
+                .getAllActive(ACTIVE.ACTIVE, catalog_id)
                 .stream()
                 .map(this::convertToProductDto)
                 .collect(Collectors.toList());
@@ -44,12 +47,12 @@ public class ProductService {
         productDto.setDescription(product.getDescription());
         productDto.setImagepath(product.getImagepath());
 //        productDto.setCatalog(product.getCatalog());
-        productDto.setProductImages(product.getProductImages());
-        productDto.setCharacteristics(product.getCharacteristics());
+//        productDto.setProductImages(product.getProductImages());
+//        productDto.setCharacteristics(product.getCharacteristics());
         return  productDto;
     }
-    public List<Product> getAllActive() {
-        return productRepository.getAllActive(ACTIVE.ACTIVE);
+    public List<Product> getAllActive(Long catalog_id) {
+        return productRepository.getAllActive(ACTIVE.ACTIVE, catalog_id);
     }
 
     public void delete(Long id) {
@@ -59,6 +62,11 @@ public class ProductService {
     public Product getById(Long id) {
         Optional<Product> productOptional = productRepository.findById(id);
         return productOptional.orElse(null);
+    }
+
+    public Product save(Product product){
+
+        return  productRepository.save(product);
     }
 
 

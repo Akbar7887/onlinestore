@@ -5,8 +5,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import uz.onlinestore.onlinestore.dto.CharacteristicDto;
-import uz.onlinestore.onlinestore.models.catalogs.Characteristic;
-import uz.onlinestore.onlinestore.models.catalogs.Product;
 import uz.onlinestore.onlinestore.service.catalogs.CharacteristicService;
 import uz.onlinestore.onlinestore.service.catalogs.ProductService;
 
@@ -28,15 +26,15 @@ public class CharacteristicResource {
     }
 
 
-    @PostMapping("addcharacter")
-    private Product saveCharacter(@RequestParam("id") String id, @RequestBody Characteristic characteristic) {
-        return characteristicService.saveCharacteristic(Long.parseLong(id), characteristic);
-    }
+//    @PostMapping("addcharacter")
+//    private Product saveCharacter(@RequestParam("id") String id, @RequestBody Characteristic characteristic) {
+//        return characteristicService.saveCharacteristic(Long.parseLong(id), characteristic);
+//    }
 
-    @PostMapping("addcharacterlist")
-    private List<CharacteristicDto> saveCharacter(@RequestParam("id") String id, @RequestBody List<Characteristic> characteristics) {
-        return characteristicService.saveCharacteristicList(Long.parseLong(id), characteristics);
-    }
+//    @PostMapping("addcharacterlist")
+//    private List<CharacteristicDto> saveCharacter(@RequestParam("id") String id, @RequestBody List<Characteristic> characteristics) {
+//        return characteristicService.saveCharacteristicList(Long.parseLong(id), characteristics);
+//    }
 
     @DeleteMapping("removecharacter")
     private void saveCharacter(@RequestParam("id") String id) {

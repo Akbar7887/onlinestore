@@ -12,6 +12,6 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-    @Query("select c from Product c where c.active = :active")
-    List<Product> getAllActive(@Param("active") ACTIVE active);
+    @Query("select c from Product c where c.active = :active and c.catalog.id = :catalog_id")
+    List<Product> getAllActive(@Param("active") ACTIVE active, @Param("catalog_id") Long id);
 }
