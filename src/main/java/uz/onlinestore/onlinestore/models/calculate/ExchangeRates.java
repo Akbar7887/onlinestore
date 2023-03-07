@@ -17,13 +17,12 @@ public class ExchangeRates {
     private Long id;
 
 
-    @Temporal(TemporalType.TIMESTAMP)
+//    @Temporal(TemporalType.TIMESTAMP)
     @Column(updatable = false)
-    @CreationTimestamp
     private Date date;
 
     @Enumerated(EnumType.STRING)
-    private RATES rates;
+    private RATES rates = RATES.USD;
 
     private double ratevalue;
 
