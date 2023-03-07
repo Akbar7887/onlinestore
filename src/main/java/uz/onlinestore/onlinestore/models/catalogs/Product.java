@@ -85,6 +85,7 @@ public class Product {
     }
 
     public Catalog getCatalog() {
+
         return catalog;
     }
 
@@ -101,7 +102,12 @@ public class Product {
 //    }
 
     public Long getCatalogId() {
-        return this.catalog.getId();
+
+        if(this.catalog != null){
+            return this.catalog.getId();
+        }else {
+            return null;
+        }
     }
 
 

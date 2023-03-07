@@ -1,40 +1,39 @@
 package uz.onlinestore.onlinestore.models.calculate;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.format.annotation.DateTimeFormat;
+import uz.onlinestore.onlinestore.models.catalogs.Product;
 
 import java.util.Date;
 
-enum RATES  { USD, EUR, UZS };
-
 @Entity
-@Table(name = "exchange_rates")
-public class ExchangeRates {
+@Table(name = "price")
+public class Price {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-
-//    @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     private Date date;
 
     @Enumerated(EnumType.STRING)
     private RATES rates = RATES.USD;
 
-    private double ratevalue;
+    private double price;
 
+    @ManyToOne
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    private Product product;
 
-    public ExchangeRates() {
+    public Price() {
     }
 
-    public ExchangeRates(Long id, Date date, RATES rates, double ratevalue) {
+    public Price(Long id, Date date, RATES rates, double price, Product product) {
         this.id = id;
         this.date = date;
         this.rates = rates;
-        this.ratevalue = ratevalue;
+        this.price = price;
+        this.product = product;
     }
 
     public Long getId() {
@@ -61,13 +60,19 @@ public class ExchangeRates {
         this.rates = rates;
     }
 
-    public double getRatevalue() {
-        return ratevalue;
+    public double getPrice() {
+        return price;
     }
 
-    public void setRatevalue(double ratevalue) {
-        this.ratevalue = ratevalue;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
+    public Product getProduct() {
+        return product;
+    }
 
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 }
