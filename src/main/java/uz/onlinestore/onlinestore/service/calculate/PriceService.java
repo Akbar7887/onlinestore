@@ -19,8 +19,8 @@ public class PriceService {
     @Autowired
     private PriceRepository priceRepository;
 
-    public List<Price> getAll(){
-        return  priceRepository.findAll();
+    public List<Price> getAll(Long id){
+        return  priceRepository.getAll(id);
     }
 
     public Price save(Price price){

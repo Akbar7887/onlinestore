@@ -18,8 +18,8 @@ public class PriceResource {
 
 
     @GetMapping("get")
-    private List<Price> getAll() {
-        return priceService.getAll();
+    private List<Price> getAll(@RequestParam("id") String id) {
+        return priceService.getAll(Long.parseLong(id));
     }
 
     @PostMapping("save")

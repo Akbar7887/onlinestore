@@ -33,7 +33,8 @@ public class CatalogRasource {
 //    }
 
     @PostMapping("save")
-    private Catalog save(@RequestBody Catalog catalog) {
+    private CatalogDto save(@RequestBody Catalog catalog) {
+
         return catalogService.save(catalog);
     }
 

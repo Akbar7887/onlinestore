@@ -56,8 +56,8 @@ public class CatalogService {
         return catalogRepository.getAllActiveAllOfThem(ACTIVE.ACTIVE);
     }
 
-    public Catalog save(Catalog catalog) {
-        return catalogRepository.save(catalog);
+    public CatalogDto save(Catalog catalog) {
+        return convertToCatalogDto(catalogRepository.save(catalog));
     }
 
     public Catalog saveSub(Long id, Catalog catalog) {
