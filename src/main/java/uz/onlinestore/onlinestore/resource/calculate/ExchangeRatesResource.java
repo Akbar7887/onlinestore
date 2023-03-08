@@ -25,8 +25,7 @@ public class ExchangeRatesResource {
     }
 
     @GetMapping("getbydate")
-    private List<ExchangeRates> getbyDate(@PathVariable(value = "date", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date date) {
-//        Date date1=new SimpleDateFormat("yyyy-MM-dd").parse(date);
+    private ExchangeRates getbyDate(@RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date date) {
         return exchangeRatesService.getbyDate(date);
     }
 

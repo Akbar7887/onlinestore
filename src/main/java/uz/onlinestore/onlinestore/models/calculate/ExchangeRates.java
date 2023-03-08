@@ -19,6 +19,7 @@ public class ExchangeRates {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date date;
 
     @Enumerated(EnumType.STRING)

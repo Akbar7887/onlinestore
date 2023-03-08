@@ -24,7 +24,7 @@ public class ExchangeRatesService {
         return  exchangeRatesRepository.findAll();
     }
 
-    public List<ExchangeRates> getbyDate(Date date){
+    public ExchangeRates getbyDate(Date date){
         return exchangeRatesRepository.getByDate(date);
     }
 

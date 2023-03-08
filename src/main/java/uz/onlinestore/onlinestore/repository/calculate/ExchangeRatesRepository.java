@@ -3,13 +3,15 @@ package uz.onlinestore.onlinestore.repository.calculate;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 import uz.onlinestore.onlinestore.models.calculate.ExchangeRates;
 
 import java.util.Date;
 import java.util.List;
 
+
 public interface ExchangeRatesRepository extends JpaRepository<ExchangeRates, Long> {
 
-    @Query("select e from ExchangeRates e  where e.date <= :date ")
-    List<ExchangeRates> getByDate(@Param("date") Date date);
+    @Query(value = "SELECT * FROM exchange_rates  WHERE date <= ?1 order by date desc LIMIT 1", nativeQuery = true)
+    ExchangeRates getByDate(@Param("date") Date date);
 }
