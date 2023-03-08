@@ -1,6 +1,7 @@
 package uz.onlinestore.onlinestore.models.calculate;
 
 import jakarta.persistence.*;
+import lombok.NonNull;
 import uz.onlinestore.onlinestore.models.catalogs.Product;
 
 import java.util.Date;
@@ -21,6 +22,9 @@ public class Price {
 
     private double price;
 
+    @Column(nullable = false)
+    private double pricesum;
+
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Product product;
@@ -28,11 +32,12 @@ public class Price {
     public Price() {
     }
 
-    public Price(Long id, Date date, RATES rates, double price, Product product) {
+    public Price(Long id, Date date, RATES rates, double price, double pricesum, Product product) {
         this.id = id;
         this.date = date;
         this.rates = rates;
         this.price = price;
+        this.pricesum = pricesum;
         this.product = product;
     }
 
@@ -74,5 +79,13 @@ public class Price {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public double getPricesum() {
+        return pricesum;
+    }
+
+    public void setPricesum(double pricesum) {
+        this.pricesum = pricesum;
     }
 }

@@ -17,7 +17,7 @@ public class ExchangeRates {
     private Long id;
 
 
-//    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     private Date date;
 

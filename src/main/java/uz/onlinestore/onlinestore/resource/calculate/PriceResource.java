@@ -7,6 +7,7 @@ import uz.onlinestore.onlinestore.models.calculate.Price;
 import uz.onlinestore.onlinestore.service.calculate.PriceService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/online/doc/price/")
@@ -19,7 +20,7 @@ public class PriceResource {
 
     @GetMapping("get")
     private List<Price> getAll(@RequestParam("id") String id) {
-        return priceService.getAll(Long.parseLong(id));
+        return priceService.getAll(Long.parseLong(id)).stream().sorted((a,b) -> b.getDate().compareTo(a.getDate())).collect(Collectors.toList());
     }
 
     @PostMapping("save")
