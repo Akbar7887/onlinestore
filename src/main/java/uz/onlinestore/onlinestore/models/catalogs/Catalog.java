@@ -39,12 +39,6 @@ public class Catalog {
     @JsonBackReference
     private Catalog parent;
 
-//    @OneToMany(mappedBy = "catalog",
-//            fetch = FetchType.LAZY,
-//            cascade = CascadeType.ALL)
-//    private List<Product> products = new ArrayList<>();
-
-
     public Catalog() {
     }
 

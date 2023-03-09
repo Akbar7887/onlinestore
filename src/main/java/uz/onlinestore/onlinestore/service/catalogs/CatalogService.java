@@ -45,12 +45,9 @@ public class CatalogService {
                 collect(Collectors.toList());
     }
 
-//    public List<CatalogDto> getByParentId(Long parent_id) {
-//        return catalogRepository.
-//                getByParent(ACTIVE.ACTIVE, parent_id).
-//                stream().
-//                map(this::convertToCatalogDto).collect(Collectors.toList());
-//    }
+    public Catalog getById(Long id) {
+        return catalogRepository.findById(id).orElse(null);
+    }
 
     public List<Catalog> getAllActiveAllOfThem() {
         return catalogRepository.getAllActiveAllOfThem(ACTIVE.ACTIVE);
@@ -88,20 +85,4 @@ public class CatalogService {
         catalogRepository.deleteById(id);
     }
 
-//    public Catalog saveProduct(Long id, Product product) {
-//        Optional<Catalog> catalogOptional = catalogRepository.findById(id);
-//        if (catalogOptional.isPresent()) {
-//            Catalog catalog = catalogOptional.get();
-//            if(product.getId() == null){
-//                catalog.addProduct(product);
-//               catalog = catalogRepository.save(catalog);
-//            }else {
-//                product.setCatalog(catalog);
-//                productRepository.save(product);
-//            }
-//            return catalog;
-//        } else {
-//            return null;
-//        }
-//    }
 }
