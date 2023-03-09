@@ -19,6 +19,9 @@ public class ProductImage {
 
     private String imagepath;
 
+
+    private Boolean mainimg = false;
+
     @ManyToOne()
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     @JsonBackReference
