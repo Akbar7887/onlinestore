@@ -25,8 +25,9 @@ public class ProductImageService {
     @Autowired
     final ProductImageRepository productImageRepository;
 
-
-
+    public List<ProductImage> getByParentId(Long id){
+        return productImageRepository.getByParentId(id);
+    }
     public ProductImage getById(Long id) {
         return productImageRepository.getById(id);
     }

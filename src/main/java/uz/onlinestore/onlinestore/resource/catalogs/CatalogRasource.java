@@ -67,7 +67,7 @@ public class CatalogRasource {
     }
 
     @PostMapping(value = "upload")
-    public ResponseEntity<?> uploadAndDownload(
+    private ResponseEntity<?> uploadAndDownload(
             @RequestParam(value = "id") String id,
             @RequestParam("file") MultipartFile file) {
 
@@ -80,7 +80,7 @@ public class CatalogRasource {
 
 
     @GetMapping("download/{id:.+}")
-    public ResponseEntity<?> downloadFile(@PathVariable("id") String id, HttpServletRequest request) throws IOException {
+    private ResponseEntity<?> downloadFile(@PathVariable("id") String id, HttpServletRequest request) throws IOException {
 
        Catalog catalog = catalogService.getById(Long.parseLong(id));
         Resource fileResource = fileService.getFile(catalog.getImagepath(), "catalogs");

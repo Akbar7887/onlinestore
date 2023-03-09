@@ -17,6 +17,7 @@ import uz.onlinestore.onlinestore.service.catalogs.ProductImageService;
 import uz.onlinestore.onlinestore.service.catalogs.ProductService;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 
 import static org.springframework.http.MediaType.parseMediaType;
@@ -33,8 +34,13 @@ public class ProductImageResource {
     private final ProductService productService;
     private final FileService fileService;
 
+    @GetMapping("get")
+    private List<ProductImage> getByParentId(@RequestParam("id") String id){
+        return productImageService.getByParentId(Long.parseLong(id));
+    }
+
     @PostMapping(value = "upload")
-    public ResponseEntity<?> uploadAndDownload(
+    private ResponseEntity<?> uploadAndDownload(
             @RequestParam(value = "id") String id,
             @RequestParam(value = "parent_id") String parent_id,
             @RequestParam(value = "mainimg") boolean mainimg,
@@ -61,7 +67,7 @@ public class ProductImageResource {
 
 
     @GetMapping("download/{id:.+}")
-    public ResponseEntity<?> downloadFile(@PathVariable("id") String id, HttpServletRequest request) throws IOException {
+    private ResponseEntity<?> downloadFile(@PathVariable("id") String id, HttpServletRequest request) throws IOException {
 
         ProductImage productImage = productImageService.getById(Long.parseLong(id));
         Resource fileResource = fileService.getFile(productImage.getImagepath(), "products");
