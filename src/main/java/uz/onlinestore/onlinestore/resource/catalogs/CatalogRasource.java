@@ -27,7 +27,7 @@ public class CatalogRasource {
 
     @Autowired
     private final CatalogService catalogService;
-    final FileService fileService;
+    private final FileService fileService;
 
 
     @GetMapping("get")
