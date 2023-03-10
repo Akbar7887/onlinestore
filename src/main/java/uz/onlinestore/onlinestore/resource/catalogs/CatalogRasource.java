@@ -100,6 +100,9 @@ public class CatalogRasource {
                 .contentType(parseMediaType(contentType))
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileResource.getFilename() + "\"")
                 .body(fileResource);
-
+    }
+    @PostMapping("deleteImage")
+    private void deleteImage(@RequestParam("id") Long id) throws Exception {
+        catalogService.deleteImage(id);
     }
 }

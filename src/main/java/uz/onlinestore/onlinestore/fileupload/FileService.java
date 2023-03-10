@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -66,9 +67,17 @@ public class FileService {
         }
     }
 
-    public String getType(MultipartFile file){
+    public String getType(MultipartFile file) {
         String filename = file.getOriginalFilename();
-        return    file.getOriginalFilename().substring(filename.lastIndexOf("."), filename.length());
+        return file.getOriginalFilename().substring(filename.lastIndexOf("."), filename.length());
+    }
+
+    public boolean delete(String filename) {
+
+        File file = new File(fileStorageLocation.toString() + "/" + filename);
+
+        return file.delete();
+
     }
 
 }

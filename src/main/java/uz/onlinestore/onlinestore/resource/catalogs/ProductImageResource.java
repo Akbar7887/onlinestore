@@ -40,7 +40,7 @@ public class ProductImageResource {
     }
 
     @PostMapping(value = "upload")
-    private ResponseEntity<?> uploadAndDownload(
+    private ResponseEntity<ProductImage> uploadAndDownload(
             @RequestParam(value = "id") String id,
             @RequestParam(value = "parent_id") String parent_id,
             @RequestParam(value = "mainimg") boolean mainimg,
@@ -61,8 +61,8 @@ public class ProductImageResource {
 
         productImagenew.setMainimg(mainimg);
         productImageService.save(productImagenew);
-
-        return ResponseEntity.ok(fileService.storeFile(file, productImagenew.getImagepath(), "products"));
+        fileService.storeFile(file, productImagenew.getImagepath(), "products");
+        return ResponseEntity.ok(productImagenew);
     }
 
 
@@ -88,6 +88,11 @@ public class ProductImageResource {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileResource.getFilename() + "\"")
                 .body(fileResource);
 
+    }
+
+    @DeleteMapping("deleteimage")
+    private void delete(@RequestParam("id") Long id)  {
+        productImageService.delete(id);
     }
 
 }

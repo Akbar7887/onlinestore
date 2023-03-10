@@ -5,8 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import uz.onlinestore.onlinestore.dto.CatalogDto;
+import uz.onlinestore.onlinestore.fileupload.FileService;
 import uz.onlinestore.onlinestore.models.ACTIVE;
 import uz.onlinestore.onlinestore.models.catalogs.Catalog;
+import uz.onlinestore.onlinestore.models.catalogs.ProductImage;
 import uz.onlinestore.onlinestore.repository.catalogs.CatalogRepository;
 import uz.onlinestore.onlinestore.repository.catalogs.ProductRepository;
 
@@ -23,6 +25,7 @@ public class CatalogService {
     final CatalogRepository catalogRepository;
     @Autowired
     final ProductRepository productRepository;
+    private final FileService fileService;
 
     private CatalogDto convertToCatalogDto(Catalog catalog) {
 
@@ -83,6 +86,14 @@ public class CatalogService {
 
     public void delete(Long id) {
         catalogRepository.deleteById(id);
+    }
+
+
+    public void deleteImage(Long id) {
+        Catalog catalog = catalogRepository.findById(id).orElse(null);
+        fileService.delete("catalogs-" + catalog.getImagepath());
+        catalog.setImagepath("");
+        catalogRepository.save(catalog);
     }
 
 }
