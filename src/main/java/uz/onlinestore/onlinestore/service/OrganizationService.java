@@ -19,8 +19,7 @@ public class OrganizationService{
 
 
     public Optional<Organization> getFirst() {
-        List<Organization> list = organizationRepository.findAll();
-        return list.stream().findFirst();
+        return organizationRepository.findAll().stream().findFirst();
     }
 
     public Organization save(Organization organization) {
