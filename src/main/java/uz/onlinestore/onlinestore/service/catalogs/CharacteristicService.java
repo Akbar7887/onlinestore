@@ -63,8 +63,8 @@ public class CharacteristicService {
 //
 //    }
 
-    public List<Characteristic> saveCharacteristicList(List<Characteristic> characteristics) {
-                  return characteristicRepository.saveAll(characteristics);
+    public Characteristic save(Characteristic characteristics) {
+                  return characteristicRepository.save(characteristics);
     }
 
     public void removeCharacteristic(Long id) {

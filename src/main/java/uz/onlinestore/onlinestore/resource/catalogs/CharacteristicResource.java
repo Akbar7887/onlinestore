@@ -33,8 +33,8 @@ public class CharacteristicResource {
 //    }
 
     @PostMapping("save")
-    private List<Characteristic> saveCharacter(@RequestBody List<Characteristic> characteristics) {
-        return characteristicService.saveCharacteristicList(characteristics);
+    private Characteristic saveCharacter(@RequestBody Characteristic characteristics) {
+        return characteristicService.save(characteristics);
     }
 
     @DeleteMapping("removecharacter")
