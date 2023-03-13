@@ -17,7 +17,7 @@ public class OrganizationResource {
 
     @GetMapping("get")
     private Organization getAll() {
-        return organizationService.getFirst().get();
+        return organizationService.getFirst().orElse(null);
     }
 
     @PostMapping("save")
